@@ -39,7 +39,9 @@ public class HelloWorld implements IAbstractTest {
     public void helloWorld() {
         LOGGER.info("Hello World!");
         Map<String, String> env = System.getenv();
-        LOGGER.info("KEK=" + env.get("KEK"));
+        int linesCount = env.get("KEK").split("\n").length;
+
+        LOGGER.info("KEK=" + env.get("KEK") + ", lines=" + linesCount);
     }
 
 }
