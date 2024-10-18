@@ -16,6 +16,7 @@
 package com.zebrunner.carina.demo;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,8 @@ public class HelloWorld implements IAbstractTest {
     @MethodOwner(owner = "qpsdemo")
     public void helloWorld() {
         LOGGER.info("Hello World!");
+        Map<String, String> env = System.getenv();
+        LOGGER.info("KEK=" + env.get("KEK"));
     }
 
 }
