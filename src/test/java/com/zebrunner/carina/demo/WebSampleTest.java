@@ -17,6 +17,7 @@ package com.zebrunner.carina.demo;
 
 import java.util.List;
 
+import com.zebrunner.agent.core.registrar.TestCase;
 import com.zebrunner.carina.demo.gui.components.ModelItem;
 import com.zebrunner.carina.demo.gui.components.NewsItem;
 import com.zebrunner.carina.demo.gui.components.compare.ModelSpecs;
@@ -50,6 +51,9 @@ public class WebSampleTest implements IAbstractTest {
     @TestPriority(Priority.P3)
     @TestLabel(name = "feature", value = {"web", "regression"})
     public void testModelSpecs() {
+
+        this.linkTestCase("MODEL_SPECS_TEST_CASE_KEYS");
+
         // Open GSM Arena home page and verify page is opened
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -73,6 +77,9 @@ public class WebSampleTest implements IAbstractTest {
     @TestPriority(Priority.P1)
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void testCompareModels() {
+
+        this.linkTestCase("COMPARE_MODELS_TEST_CASE_KEYS");
+
         // Open GSM Arena home page and verify page is opened
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
@@ -100,6 +107,9 @@ public class WebSampleTest implements IAbstractTest {
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void testNewsSearch() {
+
+        this.linkTestCase("NEWS_SEARCH_TEST_CASE_KEYS");
+
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
@@ -124,6 +134,9 @@ public class WebSampleTest implements IAbstractTest {
     @TestPriority(Priority.P3)
     @TestLabel(name = "feature", value = {"web", "regression"})
     public void testBrandGroup() {
+
+        this.linkTestCase("BRAND_GROUP_TEST_CASE_KEYS");
+
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
@@ -141,6 +154,15 @@ public class WebSampleTest implements IAbstractTest {
         }
 
         softAssert.assertAll();
+    }
+
+    private void linkTestCase(String envKey) {
+        String keys = System.getenv(envKey);
+        if (keys != null) {
+            for (String testCaseKey : keys.split(",")) {
+                TestCase.setTestCaseKey(testCaseKey);
+            }
+        }
     }
 
 }
